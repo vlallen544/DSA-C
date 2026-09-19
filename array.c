@@ -1,4 +1,4 @@
- # include <stdio.h>
+# include <stdio.h>
 # include <stdlib.h>
 
 void traversal(int *arr, int size){
@@ -61,16 +61,31 @@ int binarysearch(int value, int size, int *arr) {
 
 }
 
+int removeElement(int* nums, int numsSize, int val) {
+
+    int j = 0;
+
+    for(int i = 0; i < numsSize; i++){
+        if(nums[i] != val){
+            nums[j] = nums[i];
+            j++;
+        }
+    }
+
+    return j;
+
+}
+
 int main() {
     int total_size = 100;
     int size = 5;
     int *arr = malloc(total_size*sizeof(int));
 
     arr[0] = 0;
-    arr[1] = 1;
+    arr[1] = 2;
     arr[2] = 2;
-    arr[3] = 3;
-    arr[4] = 4;
+    arr[3] = 2;
+    arr[4] = 2;
 
     printf("The traversal of array : \n");
     traversal(arr, size);
@@ -91,6 +106,9 @@ int main() {
     printf("Checking if 4 value exist in the above array\n");
     binarysearch(67, size, arr);
 
+    size = removeElement(arr, size, 2);
+    printf("\nThe new size is %d", size);
+    
     free(arr);
     return 0;
 
