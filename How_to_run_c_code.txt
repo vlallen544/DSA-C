@@ -1,0 +1,4 @@
+# to run code in c/c++ in zed terminal
+gcc hello.c -Wall -Wextra -g -o hello
+# then run the executable
+./hello
