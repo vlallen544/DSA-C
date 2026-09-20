@@ -76,16 +76,28 @@ int removeElement(int* nums, int numsSize, int val) {
 
 }
 
+int removeDuplicates(int* nums, int numsSize) {
+    int j = 0;
+
+    for(int i = 1; i <= numsSize; i++){
+        if(nums[i-1] != nums[i]){
+            nums[j] = nums[i-1];
+            j++;
+        }
+    }
+
+    return j;
+
+}
+
 int main() {
     int total_size = 100;
-    int size = 5;
+    int size = 3;
     int *arr = malloc(total_size*sizeof(int));
 
-    arr[0] = 0;
-    arr[1] = 2;
+    arr[0] = 1;
+    arr[1] = 1;
     arr[2] = 2;
-    arr[3] = 2;
-    arr[4] = 2;
 
     printf("The traversal of array : \n");
     traversal(arr, size);
@@ -106,7 +118,10 @@ int main() {
     printf("Checking if 4 value exist in the above array\n");
     binarysearch(67, size, arr);
 
-    size = removeElement(arr, size, 2);
+    // size = removeElement(arr, size, 2);
+    // printf("\nThe new size is %d", size);
+    
+    size = removeDuplicates(arr, size);
     printf("\nThe new size is %d", size);
     
     free(arr);
