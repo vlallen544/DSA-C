@@ -1,4 +1,29 @@
 #include <stdio.h>
+
+bool containsDuplicate(int* nums, int numsSize) {
+
+    int size = 10;
+    int hash[1000000] = {0};
+    int index;
+
+    for(int i = 0; i<numsSize; i++){
+        index = index % 1000000;
+        if(hash[index] > 0){
+            hash[index] += 1;
+        }
+        else{
+            hash[index] = 1;
+        }
+    }
+
+    for(int i = 0; i<numsSize; i++){
+        if(hash[i] > 0){
+            return 1;
+        }
+    }
+
+}
+
 int main(){
     int arr[6];
     int hash[10] = {0};
