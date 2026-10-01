@@ -9,22 +9,7 @@ struct node {
 void traversel(struct node *head){
     struct node *current = head;
     int i = 1;
-    while(current != NULL){
-        if(i == 1){
-            printf("%dst element value is %d\n", i, current->val);
-            current = current->next;
-            i++;
-        }
-        if(i == 2){
-            printf("%dnd element value is %d\n", i, current->val);
-            current = current->next;
-            i++;
-        }
-        if(i == 3){
-            printf("%drd element value is %d\n", i, current->val);
-            current = current->next;
-            i++;
-        }
+    while(current != NULL) {
         printf("%dth element value is %d\n", i, current->val);
         current = current->next;
         i++;
@@ -86,19 +71,70 @@ struct node * insertionatend(struct node *head, int value){
     return head;
 }
 
-struct node *deleteatbeginning(struct node *head, int value){
-    struct node *nexthead = malloc(sizeof(struct node));
-    // Exception handling of what if the stack is full 
-    // and no more memory can allocated
-    if(nexthead == NULL){
-        printf("Memory allocation failed. \n");
-        return head;
+struct node *deleteatbeginning(struct node *head){
+    if(head == NULL){
+        printf("lineked list is empty\n");
+        return NULL;
     }
-    nexthead->val = value;
-    nexthead->next = head;
-    return nexthead;
+    struct node *ptr = head;
+    head = ptr->next;
+    free(ptr);
+    return head;
 }
 
+struct node * deleteatbetween(struct node *head, int position){
+    struct node *current = head;
+    if(current == NULL){
+        printf("lineked list is empty\n");
+        return NULL;
+    }
+    if(position <= 1){
+        printf("Invalid position\n");
+        return head;
+    }
+    for(int i = 0; i<position-1 && current != NULL; i++){
+        current = current->next;
+    }
+    if (current == NULL || current->next == NULL) {
+        printf("Invalid position\n");
+        return head;
+    }
+
+    struct node *temp = current->next;
+    current->next = temp->next;
+    free(temp);
+
+    return head;
+}
+
+struct node * deletionatend(struct node * head){
+    struct node *current = head;
+    if(current == NULL){
+        printf("lineked list is empty\n");
+        return NULL;
+    }
+    while(current->next->next != NULL){
+        current = current->next;
+    }
+
+    struct node *temp = current->next;
+    current->next = NULL;
+    free(temp);
+
+    return head;
+}
+
+void searching(struct node *current1, int value){
+    struct node *current = current1;
+    int i = 0;
+    while(current != NULL){
+        if(current->val == value){
+            printf("found %d at %d position of the linked list", value, i+1);
+        }
+        i++;
+        current = current->next;
+    }
+}
 
 int main(){
 
@@ -110,9 +146,9 @@ int main(){
 
     one->val = 1;
     one->next = two;
-    two->val = 2;
+    two->val = 3;
     two->next = three;
-    three->val = 3;
+    three->val = 2;
     three->next = four;
     four->val = 4;
     four->next = five;
@@ -124,8 +160,19 @@ int main(){
     //insertionatbetween(one, 36, 34);
     //printf("Traversal after insertion of values : \n");
     printf("Traversal after insertion of values : \n");
-    one = insertionatend(one, 6);
-    traversel(one);
+    // one = insertionatend(one, 6);
+    // traversel(one);
+    // printf("Traversal after deletion of values at beginning : \n");
+    // one = deleteatbeginning(one);
+    // traversel(one);
+    // printf("Traversal after deletion of values in between : \n");
+    // one = deleteatbetween(one, 3);
+    // traversel(one);
+    // printf("Traversal after deletion of values at end : \n");
+    // one = deletionatend(one);
+    // traversel(one);
+
+    searching(one, 2);
     
     return 0;
 }
