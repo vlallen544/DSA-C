@@ -136,6 +136,20 @@ void searching(struct node *current1, int value){
     }
 }
 
+struct node * reversingllist(struct node *current1){
+    struct node *prev = NULL;
+    struct node *current = current1;
+    struct node *next = NULL;
+    while(current != NULL){
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    current1 = prev;
+    return prev;
+}
+
 int main(){
 
     struct node *one = malloc(sizeof(struct node));
@@ -172,7 +186,10 @@ int main(){
     // one = deletionatend(one);
     // traversel(one);
 
-    searching(one, 2);
+    // searching(one, 2);
+    one = reversingllist(one);
+    printf("Traversal after reversing the linked list\n");
+    traversel(one);
     
     return 0;
 }
